@@ -1,0 +1,2 @@
+<?php
+require('./model/_connect.php'); $sql = "SELECT * FROM pinyougou.cart"; $result = mysqli_query($conn,$sql); if(mysqli_num_rows($result)>0){ $arr = mysqli_fetch_all($result,MYSQLI_ASSOC); echo json_encode(array("code"=>1,"data"=>$arr)); }else{ echo json_encode(array("code"=>0)); } ?>

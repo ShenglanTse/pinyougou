@@ -1,0 +1,2 @@
+<?php
+$tel = $_POST['tel']; $pw = $_POST['pw']; $conn = mysqli_connect('localhost','root','root','pinyougou'); $sql = "SELECT * FROM `user` WHERE `tel`='$tel' AND `pw`='$pw'"; $result = mysqli_query($conn,$sql); $data = mysqli_fetch_assoc($result); if($data) { $arr = array('code'=>1,'data'=>array('data'=>$data)); }else { $arr = array('code'=>0,'msg'=>'手机号或验证码或密码错误'); } echo json_encode($arr); ?>

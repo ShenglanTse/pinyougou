@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Document</title><script src=./jquery-1.12.4.js></script></head><body><h1>购物车页面</h1><h2></h2><ul></ul><script>// 欢迎用户登陆购物车
+        $('h2').html('欢迎你' + localStorage.getItem('tel'));
+
+        // 渲染购物车数据库数据
+
+        function showCart() {
+            $.ajax({
+                url: './interface/showlist.php',
+                dataType: 'json',
+                success: function (res) {
+                    console.log(res);
+                    $.each(res.data, function (index, item) {
+                        $('ul').append(`<li>
+                        <p>${item.product_id}</p>
+                        <p>
+                            <img src="../${item.product_img}">
+                        </p>
+                        <p>${item.product_name}</p>
+                        <p>${item.product_num}</p>
+                        <p>
+                        ${item.product_price}.00</p>
+                        <button class="delProduct"
+                        >
+                        删除该商品
+                        </button>
+                        </li>`)
+                    })
+                }
+            })
+        }
+        showCart();
+
+        // 删除购物车商品
+
+        $('ul').on('click', '.delProduct', function () {
+            var id = $(this).parent().children().eq(0).html();
+            $.ajax({
+                url: './interface/delwq.php',
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code) {
+                        location.reload()
+                    }
+                }
+            })
+        })</script></body></html>

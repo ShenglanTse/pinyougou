@@ -1,0 +1,2 @@
+<?php
+ require('./model/_connect.php'); $id = $_REQUEST['id']; $sql = "SELECT * FROM `cart` WHERE `product_id`='$id'"; $res = mysqli_query($conn,$sql); $row = mysqli_fetch_assoc($res); $num = $row['product_num']; echo $num; ?>
